@@ -35,7 +35,7 @@ export function Gallery() {
 
           <div className="flex flex-col items-start gap-6">
             <p className={gallery.description}>{description}</p>
-            <Button href={cta.href} variant="dark" size="md">
+            <Button href={cta.href} variant="outline" size="md">
               {cta.label}
             </Button>
           </div>

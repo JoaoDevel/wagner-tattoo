@@ -6,5 +6,4 @@ export const navLinks = [
 
 export const navCtas = [
   { label: "BOOK APPOINTMENT", href: "#book", variant: "solid" as const },
-  { label: "APPLY", href: "#apply", variant: "outline" as const },
 ] as const;

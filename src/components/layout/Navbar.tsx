@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -10,8 +10,7 @@ import { cn } from "@/lib/cn";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hideOnScroll, setHideOnScroll] = useState(false);
-  const lastScrollY = useRef(0);
+  const [showAtTop, setShowAtTop] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -23,32 +22,16 @@ export function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
+    const threshold = 12;
     const onScroll = () => {
       const y = window.scrollY || 0;
-
-      // Reinicia cuando vuelves al inicio
-      if (y < 10) {
-        setHideOnScroll(false);
-        lastScrollY.current = y;
-        return;
-      }
-
-      const goingDown = y > lastScrollY.current;
-      lastScrollY.current = y;
-
-      // Solo ocultar al bajar (y no si el menú está abierto)
-      if (goingDown && !menuOpen) setHideOnScroll(true);
-      if (!goingDown || menuOpen) setHideOnScroll(false);
+      setShowAtTop(y <= threshold);
     };
 
-    lastScrollY.current = window.scrollY || 0;
     onScroll();
-
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [menuOpen]);
-
-  const shouldHide = hideOnScroll && !menuOpen;
+  }, []);
 
   return (
     <header
@@ -60,9 +43,9 @@ export function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        transform: shouldHide ? "translateY(-110%)" : "translateY(0)",
-        opacity: shouldHide ? 0 : 1,
-        transition: "transform 220ms ease-out, opacity 220ms ease-out",
+        transform: showAtTop || menuOpen ? "translateY(0)" : "translateY(-120%)",
+        opacity: showAtTop || menuOpen ? 1 : 0,
+        transition: "transform 180ms ease-out, opacity 180ms ease-out",
       }}
     >
       <Container
