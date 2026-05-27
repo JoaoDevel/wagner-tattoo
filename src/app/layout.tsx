@@ -7,9 +7,35 @@ import { dmSans } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blindreason Tattoo | Luxury Tattoo Studio NYC",
+  title: {
+    default: "Wagner Tattoo",
+    template: "%s | Wagner Tattoo",
+  },
   description:
-    "Estudio de tatuajes de lujo en NYC. Arte personalizado, estética cinematográfica y experiencia premium.",
+    "Estudio de tatuajes premium. Arte personalizado, estética cinematográfica y experiencia de alto nivel.",
+  applicationName: "Wagner Tattoo",
+  keywords: [
+    "Wagner Tattoo",
+    "tattoo studio",
+    "custom tattoos",
+    "blackwork",
+    "fine line",
+    "tattoos",
+  ],
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    siteName: "Wagner Tattoo",
+    title: "Wagner Tattoo",
+    description:
+      "Estudio de tatuajes premium. Arte personalizado, estética cinematográfica y experiencia de alto nivel.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wagner Tattoo",
+    description:
+      "Estudio de tatuajes premium. Arte personalizado, estética cinematográfica y experiencia de alto nivel.",
+  },
 };
 
 export default function RootLayout({
